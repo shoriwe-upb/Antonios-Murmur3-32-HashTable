@@ -13,7 +13,7 @@ func init() {
 }
 
 func TestStringOnlyInitializationCheckCollision(t *testing.T) {
-	log.Printf("Testing Antonio's hash table with %d\n entries", hashLength)
+	log.Printf("Testing Antonio's hash table with %d entries\n", hashLength)
 	stringOnlyHash := NewTable(hashLength)
 	reference := map[string]int{}
 	for i := 0; i < hashLength; i++ {

@@ -43,7 +43,25 @@ python pretty-test.py
 ##### Output
 
 ```
-
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Testing: github.com/shoriwe-upb/Antonios-Murmur3-32-HashTable/cmd: ?   	github.com/shoriwe-upb/Antonios-Murmur3-32-HashTable/cmd	[no test files]
+------------------------------------------------------------------------------------------------------------------
+Testing: github.com/shoriwe-upb/Antonios-Murmur3-32-HashTable/pkg/hash: 2021/05/14 15:39:11 Testing Murmur32 Hash
+	 TestMurmur3_32Bits
+		 === RUN   TestMurmur3_32Bits
+		     murmur_test.go:26: Murmur32 Hash Success
+		 --- PASS: TestMurmur3_32Bits (0.00s)
+--------------------------------------------------------------------------------------------------------------------------
+Testing: github.com/shoriwe-upb/Antonios-Murmur3-32-HashTable/pkg/table: 2021/05/14 15:39:11 Testing Antonio's hash table
+	 TestStringOnlyInitializationCheckCollision
+		 === RUN   TestStringOnlyInitializationCheckCollision
+		 2021/05/14 15:39:11 Testing Antonio's hash table with 100000 entries
+		     table_test.go:37: Test String - Integer: SUCCESS -> No collisions found
+		 --- PASS: TestStringOnlyInitializationCheckCollision (0.13s)
+	 TestStruct
+		 === RUN   TestStruct
+		     table_test.go:88: Test Structs: SUCCESS
+		 --- PASS: TestStruct (0.00s)
 ```
 
 #### CSV table test
