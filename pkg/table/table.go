@@ -1,10 +1,10 @@
 package table
 
 import (
-	"DataStructures/HashTable/pkg/hash"
 	"crypto/rand"
 	"errors"
 	"fmt"
+	"github.com/shoriwe-upb/Antonios-Murmur3-32-HashTable/pkg/hash"
 	"math/big"
 )
 
