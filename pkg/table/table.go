@@ -59,6 +59,22 @@ func (table *Table) Set(key interface{}, value interface{}) {
 	table.content[index] = append(table.content[index], NewKeyValue(keyString, value))
 }
 
+func (table *Table) Delete(key interface{}) error {
+	keyString := keyToString(key)
+	index := hash.Murmur3_32Bits(keyString, table.seek) % table.length
+	for keyValueIndex, keyValue := range table.content[index] {
+		if keyValue.key == keyString {
+			newIndexContent := table.content[index][:keyValueIndex]
+			if keyValueIndex+1 < len(table.content[index]) {
+				newIndexContent = append(newIndexContent, table.content[index][keyValueIndex+1:]...)
+			}
+			table.content[index] = newIndexContent
+			return nil
+		}
+	}
+	return errors.New("element not found in hash table with the provided key")
+}
+
 func NewTable(length uint32) *Table {
 	seek, generationError := rand.Int(rand.Reader, big.NewInt(2147483647))
 	if generationError != nil {

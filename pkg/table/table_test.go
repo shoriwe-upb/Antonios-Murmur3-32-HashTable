@@ -87,3 +87,74 @@ func TestStruct(t *testing.T) {
 	}
 	t.Logf("Test Structs: SUCCESS")
 }
+
+func TestValueUpdate(t *testing.T) {
+	hashTable := NewTable(hashLength)
+	for i := 0; i < hashLength; i++ {
+		hashTable.Set(i, i)
+	}
+	reference := map[int]int{}
+	for i := 0; i < hashLength; i++ {
+		hashTable.Set(i, -i)
+		reference[i] = -i
+	}
+	for i := 0; i < hashLength; i++ {
+		value, getError := hashTable.Get(i)
+		if getError != nil {
+			t.Error(getError)
+			return
+		}
+		if value != reference[i] {
+			t.Errorf("Key: %d; Received: %d, Expecting %d", i, value, reference[i])
+			return
+		}
+	}
+}
+
+func TestDeletionSmall(t *testing.T) {
+	deletionHash := NewTable(hashLength)
+	deletionHash.Set(1, 1)
+	deletionError := deletionHash.Delete(1)
+	if deletionError != nil {
+		t.Error(deletionError)
+		return
+	}
+	value, getError := deletionHash.Get(1)
+	if getError == nil {
+		t.Errorf("Key %d was not deleted, returned %v", 1, value)
+		return
+	}
+	// Finally re set the value
+	deletionHash.Set(1, 1)
+	value, getError = deletionHash.Get(1)
+	if getError != nil {
+		t.Error(getError)
+		return
+	}
+	if value != 1 {
+		t.Errorf("Received %v Expecting %d", value, 1)
+		return
+	}
+
+}
+
+func TestDeletionBig(t *testing.T) {
+	deletionHash := NewTable(hashLength)
+	for i := 0; i < hashLength; i++ {
+		deletionHash.Set(i, i)
+	}
+	for i := 0; i < hashLength; i++ {
+		deletionError := deletionHash.Delete(i)
+		if deletionError != nil {
+			t.Error(deletionError)
+			return
+		}
+	}
+	for i := 0; i < hashLength; i++ {
+		value, getError := deletionHash.Get(i)
+		if getError == nil {
+			t.Errorf("Key %d was not deleted, returned %v", i, value)
+			return
+		}
+	}
+}
